@@ -5,8 +5,9 @@ const routes = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('src/pages/front/IndexPage.vue'), meta: { title: '首頁' } },
-      { path: 'register', component: () => import('src/pages/front/RegisterIn.vue'), meta: { title: '註冊頁' } }
+      { path: '', name: '首頁', component: () => import('src/pages/front/IndexPage.vue'), meta: { title: '首頁' } },
+      { path: 'register', name: '註冊', component: () => import('src/pages/front/RegisterIn.vue'), meta: { title: '註冊頁' } },
+      { path: 'login', name: '登入', component: () => import('src/pages/front/LoginPageView.vue'), meta: { title: '登入頁' } }
     ]
   },
   {
@@ -24,9 +25,5 @@ const routes = [
     component: () => import('pages/ErrorNotFound.vue')
   }
 ]
-
-// routes.afterEach((to, from) => {
-//   document.title = to.meta.title
-// })
 
 export default routes

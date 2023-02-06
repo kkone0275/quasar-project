@@ -13,8 +13,9 @@
         <q-btn class="font-r" flat label="組隊揪夥" :class="changeActiveClass('/1')"/>
         <q-btn class="font-r" flat label="時間填空" :class="changeActiveClass('/2')"/>
         <q-btn class="font-r" flat label="關於我們" :class="changeActiveClass('/3')"/>
-        <q-btn class="btn-r" style="background:#F3A308 ; color: white" label="會員註冊" to="register"/>
-        <q-btn class="btn-r" label="會員登入" color="yellow-9" @click="prompt = true"/>
+        <q-btn class="btn-r" style="background:#F3A308 ; color: white" label="會員註冊" to="/register"/>
+        <q-btn class="btn-r" style="background:#F3A308 ; color: white" label="會員登入" to="/login"/>
+        <!-- <q-btn class="btn-r" color="yellow-9" @click="prompt = true" label="會員登入" to="login"/> -->
         <!-- <q-btn class="btn-r" label="會員註冊" color="yellow-9" @click="register = true"/> -->
 
         <q-dialog v-model="register" persistent>
