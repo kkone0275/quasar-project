@@ -106,7 +106,7 @@ import { ref, reactive } from 'vue'
 import validator from 'validator'
 import Swal from 'sweetalert2'
 import { useRouter } from 'vue-router'
-import { api } from '../../boot/axios'
+import { api } from 'src/boot/axios'
 
 const router = useRouter()
 
@@ -147,6 +147,7 @@ const onSubmit = async () => {
     })
     router.push('/')
   } catch (error) {
+    console.log(error)
     Swal.fire({
       icon: 'error',
       title: '失敗',
