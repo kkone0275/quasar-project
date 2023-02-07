@@ -13,8 +13,12 @@
         <q-btn class="font-r" flat label="組隊揪夥" :class="changeActiveClass('/1')"/>
         <q-btn class="font-r" flat label="時間填空" :class="changeActiveClass('/2')"/>
         <q-btn class="font-r" flat label="關於我們" :class="changeActiveClass('/3')"/>
-        <q-btn class="btn-r" style="background:#F3A308 ; color: white" label="會員註冊" to="/register"/>
-        <q-btn class="btn-r" style="background:#F3A308 ; color: white" label="會員登入" to="/login"/>
+        <q-btn v-if="!isLogin" class="btn-r" style="background:#F3A308 ; color: white" label="會員註冊" to="/register"/>
+        <q-btn v-if="!isLogin" class="btn-r" style="background:#F3A308 ; color: white" label="會員登入" to="/login"/>
+        <q-btn v-if="isLogin" class="btn-r" style="background:#F3A308 ; color: white" :content="cart" label="購物車" to="/cart"/>
+        <q-btn v-if="isLogin" class="btn-r" style="background:#F3A308 ; color: white" label="訂單" to="/Order"/>
+        <q-btn v-if="isLogin && isAdmin" class="btn-r" style="background:#F3A308 ; color: white" label="管理" to="/manage"/>
+        <q-btn v-if="isLogin" class="btn-r" style="background:#F3A308 ; color: white" label="會員登出" @click="logout"/>
         <!-- <q-btn class="btn-r" color="yellow-9" @click="prompt = true" label="會員登入" to="login"/> -->
         <!-- <q-btn class="btn-r" label="會員註冊" color="yellow-9" @click="register = true"/> -->
 
@@ -98,6 +102,12 @@ border-bottom: 5px solid #FF775C;
 <script setup>
 import { useRoute } from 'vue-router'
 import { ref } from 'vue'
+import { useUserStore } from '../stores/user.js'
+import { storeToRefs } from 'pinia'
+
+// import { useUserStore } from '../stores/user.js'
+// import { storeToRefs } from 'pinia';
+// const user = useUserStore()
 
 const register = ref(false)
 
@@ -108,5 +118,9 @@ const route = useRoute()
 const changeActiveClass = (path) => {
   return route.path === path ? 'active' : ''
 }
+
+const user = useUserStore()
+const { isLogin, isAdmin, cart } = storeToRefs(user)
+const { logout } = user
 
 </script>

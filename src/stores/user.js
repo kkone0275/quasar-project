@@ -1,12 +1,9 @@
 import { defineStore } from 'pinia'
-import { ref, computed } from 'vue'
-import { api, apiAuth } from '@/plugins/axios'
+import { computed, ref } from 'vue'
+import { api, apiAuth } from '../boot/axios.js'
 import Swal from 'sweetalert2'
-import { useRouter } from 'vue-router'
 
 export const useUserStore = defineStore('user', () => {
-  const router = useRouter()
-
   const token = ref('')
   const account = ref('')
   const email = ref('')
@@ -20,10 +17,10 @@ export const useUserStore = defineStore('user', () => {
     return role.value === 1
   })
   const avatar = computed(() => {
-    return `https://source.boringavatars.com/beam/256/${account.value}?colors=ffabab,ffdaab,ddffab,abe4ff,d9abff`
+    return `https://source.boringavatars.com/beam/256/${account.value}?colors=BABA9D,303030,ff4000,ffc803,E1EEE4`
   })
 
-  const login = async (form) => {
+  async function login (form) {
     try {
       const { data } = await api.post('/users/login', form)
       token.value = data.result.token
@@ -36,7 +33,7 @@ export const useUserStore = defineStore('user', () => {
         title: '成功',
         text: '登入成功'
       })
-      router.push('/')
+      this.router.push('/')
     } catch (error) {
       Swal.fire({
         icon: 'error',
@@ -46,14 +43,14 @@ export const useUserStore = defineStore('user', () => {
     }
   }
 
-  const logout = async () => {
+  async function logout () {
     try {
       await apiAuth.delete('/users/logout')
       token.value = ''
       account.value = ''
       role.value = 0
       cart.value = 0
-      router.push('/')
+      this.router.push('/')
       Swal.fire({
         icon: 'success',
         title: '成功',
@@ -68,19 +65,6 @@ export const useUserStore = defineStore('user', () => {
     }
   }
 
-  const getUser = async () => {
-    if (token.value.length === 0) return
-    try {
-      const { data } = await apiAuth.get('/users/me')
-      account.value = data.result.account
-      email.value = data.result.email
-      cart.value = data.result.cart
-      role.value = data.result.role
-    } catch (error) {
-      logout()
-    }
-  }
-
   return {
     token,
     account,
@@ -89,14 +73,8 @@ export const useUserStore = defineStore('user', () => {
     role,
     login,
     logout,
-    getUser,
     isLogin,
     isAdmin,
     avatar
-  }
-}, {
-  persist: {
-    key: '20230103',
-    paths: ['token']
   }
 })

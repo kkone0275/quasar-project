@@ -97,17 +97,15 @@ p {
 
 <script setup>
 import { ref, reactive } from 'vue'
-import { useRouter } from 'vue-router'
+import { useUserStore } from '../../stores/user'
 
-const router = useRouter()
+const user = useUserStore()
 
 const valid = ref(false)
 const loading = ref(false)
 const form = reactive({
   account: '',
-  password: '',
-  passwordConfirm: '',
-  email: ''
+  password: ''
 })
 
 const rules = {
@@ -117,6 +115,12 @@ const rules = {
   length (value) {
     return (value.length >= 4 && value.length <= 20) || '長度必須為 4 ~ 20 個字'
   }
+}
+
+const login = async () => {
+  loading.value = true
+  await user.login(form)
+  loading.value = false
 }
 
 </script>
