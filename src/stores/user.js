@@ -65,6 +65,19 @@ export const useUserStore = defineStore('user', () => {
     }
   }
 
+  const getUser = async () => {
+    if (token.value.length === 0) return
+    try {
+      const { data } = await apiAuth.get('/users/me')
+      account.value = data.result.account
+      email.value = data.result.email
+      cart.value = data.result.cart
+      role.value = data.result.role
+    } catch (error) {
+      logout()
+    }
+  }
+
   return {
     token,
     account,
@@ -73,8 +86,14 @@ export const useUserStore = defineStore('user', () => {
     role,
     login,
     logout,
+    getUser,
     isLogin,
     isAdmin,
     avatar
+  }
+}, {
+  persist: {
+    key: 'Bingo',
+    paths: ['token']
   }
 })

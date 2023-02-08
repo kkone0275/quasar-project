@@ -17,7 +17,7 @@
         <q-btn v-if="!isLogin" class="btn-r" style="background:#F3A308 ; color: white" label="會員登入" to="/login"/>
         <q-btn v-if="isLogin" class="btn-r" style="background:#F3A308 ; color: white" :content="cart" label="購物車" to="/cart"/>
         <q-btn v-if="isLogin" class="btn-r" style="background:#F3A308 ; color: white" label="訂單" to="/Order"/>
-        <q-btn v-if="isLogin && isAdmin" class="btn-r" style="background:#F3A308 ; color: white" label="管理" to="/manage"/>
+        <q-btn v-if="isLogin && isAdmin" class="btn-r" style="background:#F3A308 ; color: white" label="管理" to="/admin"/>
         <q-btn v-if="isLogin" class="btn-r" style="background:#F3A308 ; color: white" label="會員登出" @click="logout"/>
         <!-- <q-btn class="btn-r" color="yellow-9" @click="prompt = true" label="會員登入" to="login"/> -->
         <!-- <q-btn class="btn-r" label="會員註冊" color="yellow-9" @click="register = true"/> -->

@@ -1,99 +1,127 @@
+
 <template>
-  <div class="q-pa-md">
-    <q-layout view="hHh Lpr lff" container style="height: 300px" class="shadow-2 rounded-borders">
-      <q-header elevated class="bg-black">
-        <q-toolbar>
-          <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
-          <q-toolbar-title>Header</q-toolbar-title>
-        </q-toolbar>
-      </q-header>
+  <q-layout view="hHh lpR fFf">
 
-      <q-drawer
-        v-model="drawer"
-        :width="200"
-        :breakpoint="500"
-        overlay
-        bordered
-        class="bg-grey-3"
-      >
-        <q-scroll-area class="fit">
-          <q-list>
-
-            <template v-for="(menuItem, index) in menuList" :key="index">
-              <q-item clickable :active="menuItem.label === 'Outbox'" v-ripple>
-                <q-item-section avatar>
-                  <q-icon :name="menuItem.icon" />
-                </q-item-section>
-                <q-item-section>
-                  {{ menuItem.label }}
-                </q-item-section>
-              </q-item>
-              <q-separator :key="'sep' + index" v-if="menuItem.separator" />
-            </template>
-
-          </q-list>
-        </q-scroll-area>
-      </q-drawer>
-
-      <q-page-container>
-        <q-page padding>
-          <p v-for="n in 15" :key="n">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit nihil praesentium molestias a adipisci, dolore vitae odit, quidem consequatur optio voluptates asperiores pariatur eos numquam rerum delectus commodi perferendis voluptate?
-          </p>
-        </q-page>
-      </q-page-container>
-    </q-layout>
+    <q-header elevated class="bg-primary text-white">
+      <q-toolbar>
+        <q-toolbar-title>
+          <RouterLink to="/">
+            <img class="logo" src="../assets/img/smalltalkc.png">
+          </RouterLink>
+          <img class="logo-show" src="../assets/img/show.png" to="/">
+        </q-toolbar-title>
+        <q-btn class="font-r" flat label="網站首頁" to="/"/>
+        <q-btn class="font-r" flat label="組隊揪夥" />
+        <q-btn class="font-r" flat label="時間填空" />
+        <q-btn class="font-r" flat label="關於我們" />
+        <div class="q-pa-md q-gutter-sm" style="height: 80px">
+    <q-avatar
+      size="40px"
+      class="overlapping"
+    >
+      <img :src="`https://source.boringavatars.com/beam/256/$colors=BABA9D,303030,ff4000,ffc803,E1EEE4`">
+    </q-avatar>
+    <q-btn class="font-r" flat label="會員登出" />
   </div>
+        <!-- <q-btn class="btn-r" color="yellow-9" @click="prompt = true" label="會員登入" to="login"/> -->
+        <!-- <q-btn class="btn-r" label="會員註冊" color="yellow-9" @click="register = true"/> -->
+
+        <q-dialog v-model="register" persistent>
+      <q-card style="min-width: 350px">
+        <q-card-section>
+          <div class="text-h6">Your address</div>
+        </q-card-section>
+
+        <q-card-section class="q-pt-none">
+          <q-input dense v-model="address" autofocus @keyup.enter="register = false" />
+        </q-card-section>
+
+        <q-card-actions align="right" class="text-primary">
+          <q-btn flat label="Add address" v-close-popup />
+          <!-- <q-btn flat label="Cancel" v-close-popup /> -->
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
+
+      </q-toolbar>
+    </q-header>
+
+    <q-drawer show-if-above v-model="leftDrawerOpen" side="left" bordered>
+      <!-- drawer content -->
+      <div class="q-pa-md q-gutter-sm" style="height: 80px">
+      <q-btn class="font-r" flat label="會員管理" to="/"/><br>
+      <q-btn class="font-r" flat label="揪夥管理" to="/"/><br>
+      <q-btn class="font-r" flat label="填空管理" to="/"/><br>
+      <q-btn class="btn-r" style="background:#F3A308 ; color: white" label="會員登出" @click="logout"/>
+      </div>
+    </q-drawer>
+
+    <q-page-container>
+      <router-view />
+    </q-page-container>
+
+  </q-layout>
 </template>
 
 <script>
-import { ref } from 'vue'
 
-const menuList = [
-  {
-    icon: 'inbox',
-    label: 'Inbox',
-    separator: true
-  },
-  {
-    icon: 'send',
-    label: 'Outbox',
-    separator: false
-  },
-  {
-    icon: 'delete',
-    label: 'Trash',
-    separator: false
-  },
-  {
-    icon: 'error',
-    label: 'Spam',
-    separator: true
-  },
-  {
-    icon: 'settings',
-    label: 'Settings',
-    separator: false
-  },
-  {
-    icon: 'feedback',
-    label: 'Send Feedback',
-    separator: false
-  },
-  {
-    icon: 'help',
-    iconColor: 'primary',
-    label: 'Help',
-    separator: false
-  }
-]
+import { ref } from 'vue'
 
 export default {
   setup () {
     return {
-      drawer: ref(true),
-      menuList
+      drawer: ref(false)
     }
   }
 }
+</script>
+
+<style scoped>
+.logo{
+  margin-top: 0.6%;
+  margin-left: 3%;
+  width: 50px;
+}
+.logo-show{
+  margin-top: 0.6%;
+  margin-left: 0.8%;
+  width: 65px;
+}
+
+.font-r{
+color:#C01E6C;
+font-size: 20px;
+font-weight: bold;
+}
+
+.q-toolbar{
+  background-color:#fac761;
+}
+
+.foot-font{
+  color: #C01E6C;
+  font-weight: bold;
+  text-align: center;
+}
+.active {
+border-bottom: 5px solid #FF775C;
+}
+
+.btn-l{
+  margin-left: 1%;
+  margin-right: 1.5%;
+}
+
+.btn-r{
+  margin-right: 2%;
+}
+
+</style>
+
+<script setup>
+// 登出鈕設定
+import { useUserStore } from '../stores/user.js'
+
+const user = useUserStore()
+const { logout } = user
 </script>
