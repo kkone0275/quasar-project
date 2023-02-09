@@ -15,12 +15,9 @@
         <q-btn class="font-r" flat label="時間填空" />
         <q-btn class="font-r" flat label="關於我們" />
         <div class="q-pa-md q-gutter-sm" style="height: 80px">
-    <q-avatar
-      size="40px"
-      class="overlapping"
-    >
-      <img :src="`https://source.boringavatars.com/beam/256/$colors=BABA9D,303030,ff4000,ffc803,E1EEE4`">
-    </q-avatar>
+          <q-btn flat round dense :icon="menu" class="q-mr-sm text-primary">
+          <img :src="avatar" style="width: 45px; height: 45px;">
+          </q-btn>
     <q-btn class="font-r" flat label="會員登出" />
   </div>
         <!-- <q-btn class="btn-r" color="yellow-9" @click="prompt = true" label="會員登入" to="login"/> -->
@@ -121,7 +118,9 @@ border-bottom: 5px solid #FF775C;
 <script setup>
 // 登出鈕設定
 import { useUserStore } from '../stores/user.js'
+import { storeToRefs } from 'pinia'
 
 const user = useUserStore()
+const { avatar } = storeToRefs(user)
 const { logout } = user
 </script>

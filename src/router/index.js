@@ -36,17 +36,12 @@ export default route(function (/* { store, ssrContext } */) {
     if (from === START_LOCATION) {
       await useUserStore().getUser()
     }
-    if (to.meta.login && !user.isLogin) {
+    if (user.isLogin && (to.path === '/register' || to.path === '/login')) {
       next('/')
-    } else if (to.meta.admin && !user.isAdmin) {
+    } else if (to.meta.login && !user.isLogin) {
       next('/login')
-    } else if (to.meta.admin) {
-      await user.getUser()
-      if (!user.isAdmin) {
-        next('/')
-      } else {
-        next()
-      }
+    } else if (to.meta.admin && !user.isAdmin) {
+      next('/')
     } else {
       next()
     }
