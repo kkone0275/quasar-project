@@ -18,6 +18,8 @@ apiAuth.interceptors.request.use(config => {
   return config
 })
 
+// 攔截器反應
+// apiAuth.interceptors.response.use(成功時的 function, 失敗時的 function)
 apiAuth.interceptors.response.use(res => {
   return res
 }, error => {
