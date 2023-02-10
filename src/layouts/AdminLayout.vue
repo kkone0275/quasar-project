@@ -46,10 +46,11 @@
     <q-drawer show-if-above v-model="leftDrawerOpen" side="left" bordered>
       <!-- drawer content -->
       <div class="q-pa-md q-gutter-sm" style="height: 80px">
-      <q-btn class="font-r" flat label="會員管理" to="/"/><br>
-      <q-btn class="font-r" flat label="揪夥管理" to="/"/><br>
-      <q-btn class="font-r" flat label="填空管理" to="/"/><br>
-      <q-btn class="btn-r" style="background:#F3A308 ; color: white" label="會員登出" @click="logout"/>
+      <q-btn class="btn-left" unelevated rounded color="orange-6" label="會員管理" to="products" /><br>
+      <q-btn class="btn-left" unelevated rounded color="orange-6" label="活動上架" to="products" /><br>
+      <q-btn class="btn-left" unelevated rounded color="orange-6" label="填空管理" to="products" /><br>
+      <q-btn class="btn-left" unelevated rounded color="orange-6" label="會員登出" @click="logout" />
+      <!-- <q-btn class="btn-r" style="background:#F3A308 ; color: white" label="會員登出" @click="logout"/> -->
       </div>
     </q-drawer>
 
@@ -111,6 +112,10 @@ border-bottom: 5px solid #FF775C;
 
 .btn-r{
   margin-right: 2%;
+}
+
+.btn-left{
+  width: 200px;
 }
 
 </style>

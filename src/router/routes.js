@@ -51,9 +51,9 @@ const routes = [
         }
       },
       {
-        path: 'activitys',
+        path: '/products',
         name: '活動上架',
-        component: () => import('src/pages/back/ActivityUp.vue'),
+        component: () => import('../pages/back/ActivityUp.vue'),
         meta: {
           title: '活動上架',
           login: true,
