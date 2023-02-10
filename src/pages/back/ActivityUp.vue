@@ -21,6 +21,18 @@
                 :shadow-text="textareaShadowText" @keydown="processTextareaFill" @focus="processTextareaFill"
                 :rules="[rules.required]"
               />
+              <q-file class="col-12" filled bottom-slots v-model="model" label="Label" counter>
+                <template v-slot:prepend>
+                  <q-icon name="cloud_upload" @click.stop.prevent />
+                </template>
+                <template v-slot:append>
+                  <q-icon name="close" @click.stop.prevent="model = null" class="cursor-pointer" />
+                </template>
+
+                <template v-slot:hint>
+                  請上傳.jpg檔
+                </template>
+              </q-file>
               <q-btn class="col-12" style="padding: 10px;" flat label="Cancel" color="primary" v-close-popup />
               </div>
             </q-form>
@@ -97,6 +109,10 @@ const openAdd = (idx) => {
 }
 
 .text-h6{
+  margin-top: 20px;
+}
+
+.q-file{
   margin-top: 20px;
 }
 </style>
