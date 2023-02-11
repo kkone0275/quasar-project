@@ -5,7 +5,7 @@
     <div class="row justify-center">
       <div class="col-12 col-md-1">
         <q-dialog v-model="form.dialog" persistent>
-          <q-card style="min-width: 800px">
+          <q-card style="min-width: 800px ">
             <div class="text-h6" align="center">{{ form._id.length > 0 ? '編輯揪團' : '新增揪團' }}</div>
             <q-form @submit="submit">
               <div class="flex row justify-between" style="padding: 16px 50px 16px 50px;">
@@ -21,7 +21,7 @@
                 :shadow-text="textareaShadowText" @keydown="processTextareaFill" @focus="processTextareaFill"
                 :rules="[rules.required]"
               />
-              <q-file class="col-12" filled bottom-slots v-model="model" label="Label" counter>
+              <q-file class="col-12 " filled bottom-slots v-model="form.image" label="活動圖片" counter>
                 <template v-slot:prepend>
                   <q-icon name="cloud_upload" @click.stop.prevent />
                 </template>
@@ -33,7 +33,8 @@
                   請上傳.jpg檔
                 </template>
               </q-file>
-              <q-btn class="col-12" style="padding: 10px;" flat label="Cancel" color="primary" v-close-popup />
+              <q-checkbox style="margin-bottom: 1.2rem;" v-model="form.sell" label="上架" />
+              <q-btn class="col-6" style="padding: 10px;" flat label="Cancel" color="primary" v-close-popup />
               </div>
             </q-form>
           </q-card>
