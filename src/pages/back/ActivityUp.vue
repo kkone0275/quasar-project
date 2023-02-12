@@ -33,8 +33,16 @@
                   請上傳.jpg檔
                 </template>
               </q-file>
+
+              <q-select class="col-8" filled :options="categories" v-model="form.category" label="活動地點" :rules="[rules.required]" />
+
               <q-checkbox class="col-8" style="margin-bottom: 1.2rem;" v-model="form.sell" label="上架" />
+
+              <!-- <q-btn class="col-6" label="Send" type="submit" :loading="loading" color="primary" /> -->
+
               <q-btn class="col-6" style="padding: 10px;" flat label="Cancel" color="primary" v-close-popup />
+
+              <q-btn class="col-6" flat label="Add Send" type="submit" :loading="loading" color="primary" />
               </div>
             </q-form>
           </q-card>
@@ -63,6 +71,8 @@ const rules = {
     return value >= 0 || '價格錯誤'
   }
 }
+
+const categories = ['台北市', '新北市', '新竹市', '台中市', '雲林縣', '台中市']
 
 const form = reactive({
   _id: '',
@@ -114,6 +124,8 @@ const openAdd = (idx) => {
 }
 
 .q-file{
-  margin-top: 20px;
+  margin-top: 25px;
+  margin-bottom: 20px;
 }
+
 </style>
