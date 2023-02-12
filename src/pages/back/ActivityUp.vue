@@ -33,7 +33,7 @@
                   請上傳.jpg檔
                 </template>
               </q-file>
-              <q-checkbox style="margin-bottom: 1.2rem;" v-model="form.sell" label="上架" />
+              <q-checkbox class="col-8" style="margin-bottom: 1.2rem;" v-model="form.sell" label="上架" />
               <q-btn class="col-6" style="padding: 10px;" flat label="Cancel" color="primary" v-close-popup />
               </div>
             </q-form>
