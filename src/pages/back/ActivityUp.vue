@@ -1,7 +1,7 @@
 <template>
   <h5 class="text-center">活動上架</h5>
   <q-btn class="add" style="background: #F3A308; color: white" @click="openAdd(-1)" label="新增揪團" />
-  <table style="width: 70%; " border="1">
+  <table class="box" style="width: 60%; " border="1">
           <thead>
             <tr align="left">
               <th>圖片</th>
@@ -10,13 +10,14 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="product in products" :key="product._id">
-              <td>
-                <img :src="product.image"  :width="100">
+            <tr v-for="(product, idx) in products" :key="product._id">
+              <td align="center">
+                <img :src="product.image" style="width: 80px;">
               </td>
               <td>{{ product.name }}</td>
-              <td >
-                <q-btn color="primary" icon="edit" @click="openDialog(idx)"></q-btn>
+              <td align="center">
+                <q-btn color="primary" icon="edit" @click="openAdd(idx)" />
+                <!-- color="primary" icon="mdi-pencil" variant="text" @click="openDialog(idx)" -->
               </td>
             </tr>
           </tbody>
@@ -25,7 +26,7 @@
     <div class="row justify-center">
       <div class="col-12 col-md-1">
         <q-dialog v-model="form.dialog" persistent>
-          <q-card > //style="max-width: 800px "
+          <q-card style="max-width: 800px ">
             <div class="text-h6" align="center">{{ form._id.length > 0 ? '編輯揪團' : '新增揪團' }}</div>
             <q-form @submit="submit">
               <div class="flex row justify-between" style="padding: 16px 50px 16px 50px;">
@@ -47,15 +48,15 @@
                   請上傳.jpg檔
                 </template>
               </q-file>
-                <q-file class="col-12" filled v-model="form.images" label="請選擇主圖片(可複選)" use-chips multiple>
+                <q-file class="col-11" filled v-model="form.images" label="請選擇主圖片(可複選)" use-chips multiple>
                   <template v-slot:prepend>
                     <q-icon name="attach_file"></q-icon>
                   </template>
                 </q-file>
-                <div class="row q-pa-md" >
-                  <q-card class="q-mr-sm" v-for="image in images" :key="image" >
-                    <q-img :src="image" width="100px" />
-                  </q-card>
+                <div class="row" >
+
+                    <q-img class="q-ml-lg" v-for="image in images" :key="image" :src="image" width="100px" />
+
                 </div>
 
               <q-select class="col-8" filled :options="categories" v-model="form.category" label="活動地點" :rules="[rules.required]" />
@@ -97,6 +98,12 @@
 
 .q-select{
   margin-top: 25px
+}
+
+.box{
+  position: absolute;
+  top: 30%;
+  left: 25%;
 }
 </style>
 
