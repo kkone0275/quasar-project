@@ -1,11 +1,31 @@
 <template>
   <h5 class="text-center">活動上架</h5>
   <q-btn class="add" style="background: #F3A308; color: white" @click="openAdd(-1)" label="新增揪團" />
+  <table style="width: 70%; " border="1">
+          <thead>
+            <tr align="left">
+              <th>圖片</th>
+              <th>名稱</th>
+              <th>管理</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="product in products" :key="product._id">
+              <td>
+                <img :src="product.image"  :width="100">
+              </td>
+              <td>{{ product.name }}</td>
+              <td >
+                <q-btn color="primary" icon="edit" @click="openDialog(idx)"></q-btn>
+              </td>
+            </tr>
+          </tbody>
+        </table>
   <div class="q-pa-md">
     <div class="row justify-center">
       <div class="col-12 col-md-1">
         <q-dialog v-model="form.dialog" persistent>
-          <q-card style="min-width: 800px ">
+          <q-card > //style="max-width: 800px "
             <div class="text-h6" align="center">{{ form._id.length > 0 ? '編輯揪團' : '新增揪團' }}</div>
             <q-form @submit="submit">
               <div class="flex row justify-between" style="padding: 16px 50px 16px 50px;">
@@ -15,7 +35,7 @@
               clearable type="textarea" @keydown="processTextareaFill"
               @focus="processTextareaFill"
               :rules="[rules.required]"/>
-              <q-file class="col-12 " filled bottom-slots v-model="form.image" label="活動圖片" counter>
+              <q-file class="col-12" filled bottom-slots v-model="form.image" label="活動圖片" counter>
                 <template v-slot:prepend>
                   <q-icon name="cloud_upload" @click.stop.prevent />
                 </template>
@@ -27,18 +47,16 @@
                   請上傳.jpg檔
                 </template>
               </q-file>
-              <q-file class="col-12 " filled bottom-slots v-model="form.images" label="活動圖片" counter>
-                <template v-slot:prepend>
-                  <q-icon name="cloud_upload" @click.stop.prevent />
-                </template>
-                <template v-slot:append>
-                  <q-icon name="close" @click.stop.prevent="model = null" class="cursor-pointer" />
-                </template>
-
-                <template v-slot:hint>
-                  請上傳.jpg檔
-                </template>
-              </q-file>
+                <q-file class="col-12" filled v-model="form.images" label="請選擇主圖片(可複選)" use-chips multiple>
+                  <template v-slot:prepend>
+                    <q-icon name="attach_file"></q-icon>
+                  </template>
+                </q-file>
+                <div class="row q-pa-md" >
+                  <q-card class="q-mr-sm" v-for="image in images" :key="image" >
+                    <q-img :src="image" width="100px" />
+                  </q-card>
+                </div>
 
               <q-select class="col-8" filled :options="categories" v-model="form.category" label="活動地點" :rules="[rules.required]" />
 
@@ -76,11 +94,15 @@
   margin-top: 25px;
   margin-bottom: 20px;
 }
+
+.q-select{
+  margin-top: 25px
+}
 </style>
 
 <script setup>
 import { apiAuth } from '../../boot/axios.js'
-import { reactive } from 'vue'
+import { ref, reactive, watch } from 'vue'
 import Swal from 'sweetalert2'
 
 const categories = ['台北市', '新北市', '新竹市', '台中市', '雲林縣', '台中市']
@@ -94,6 +116,7 @@ const rules = {
 }
 
 const products = reactive([])
+const images = ref([])
 const form = reactive({
   _id: '',
   name: '',
@@ -112,7 +135,8 @@ const openAdd = (idx) => {
     form.name = ''
     form.price = 0
     form.description = ''
-    form.image = undefined
+    // form.image = undefined
+    form.images = []
     form.sell = false
     form.category = ''
     form.loading = false
@@ -122,13 +146,30 @@ const openAdd = (idx) => {
     form.name = products[idx].name
     form.price = products[idx].price
     form.description = products[idx].description
-    form.image = undefined
+    form.images = products[idx].images
     form.sell = products[idx].sell
     form.category = products[idx].category
     form.loading = false
     form.idx = idx
   }
   form.dialog = true
+}
+
+watch(() => form.images, (value) => {
+  images.value = []
+  value.forEach((img) => previewUrlHandler(img))
+})
+
+const previewUrlHandler = (file) => {
+  if (file && file.type.startsWith('image/')) {
+    const reader = new FileReader()
+    reader.addEventListener('load', (event) => {
+      images.value.push(event.target.result)
+    })
+    reader.readAsDataURL(file)
+  } else {
+    images.value.push(file)
+  }
 }
 
 const submit = async () => {
@@ -138,13 +179,11 @@ const submit = async () => {
   fd.append('name', form.name)
   fd.append('price', form.price)
   fd.append('description', form.description)
-  fd.append('image', form.image)
   fd.append('sell', form.sell)
+  fd.append('image', form.image)
   fd.append('category', form.category)
-  if (form.images.length >= 1) {
-    form.images.forEach((item) => {
-      fd.append('images', item.image)
-    })
+  for (const i of form.images) {
+    fd.append('images', i)
   }
   try {
     if (form._id.length === 0) {
