@@ -33,6 +33,26 @@ const routes = [
           login: false,
           admin: false
         }
+      },
+      {
+        path: 'teamup',
+        name: '組隊揪夥',
+        component: () => import('src/pages/front/TeamUp.vue'),
+        meta: {
+          title: '組隊揪夥',
+          login: false,
+          admin: false
+        }
+      },
+      {
+        path: 'products/:id',
+        name: 'products',
+        component: () => import('src/pages/front/ProductPageView.vue'),
+        meta: {
+          title: '活動網站 | 活動',
+          login: false,
+          admin: false
+        }
       }
     ]
   },

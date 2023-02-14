@@ -9,8 +9,8 @@
           </RouterLink>
           <img class="logo-show" src="../assets/img/show.png" to="/">
         </q-toolbar-title>
-        <q-btn class="font-r" flat label="網站首頁" :class="changeActiveClass('/')" to="/"/>
-        <q-btn class="font-r" flat label="組隊揪夥" :class="changeActiveClass('/1')"/>
+        <q-btn class="font-r" flat label="網站首頁" :class="changeActiveClass('/')" to="/" />
+        <q-btn class="font-r" flat label="組隊揪夥" :class="changeActiveClass('/teamup')" to="/teamup" />
         <q-btn class="font-r" flat label="時間填空" :class="changeActiveClass('/2')"/>
         <q-btn class="font-r" flat label="關於我們" :class="changeActiveClass('/3')"/>
         <q-btn v-if="!isLogin" class="btn-r" style="background:#F3A308 ; color: white" label="會員註冊" to="/register"/>
