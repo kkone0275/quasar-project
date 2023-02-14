@@ -1,5 +1,11 @@
 <template>
-<h6>活動說明空間</h6>
+  <h6>{{ product.name }}</h6>
+  <hr>
+    <div class="page">
+      <img :src="product.image">
+      <p>${{ product.price }}</p>
+      <p style="white-space: pre;">{{ product.description }}</p>
+    </div>
 </template>
 
 <script setup>
@@ -44,3 +50,14 @@ const product = reactive({
   }
 })()
 </script>
+
+<style scoped>
+  .page{
+    position: absolute;
+    text-align: left;
+    right: 28%;
+  }
+  img{
+    width: 50%;
+  }
+</style>

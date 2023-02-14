@@ -3,9 +3,10 @@
       <img :src="image">
 
       <q-card-section>
-        <q-item-label>
+        <!-- <q-item-label>
           <router-link :to="'/products/' + _id">{{ name }}</router-link>
-        </q-item-label>
+        </q-item-label> -->
+        <div class="text-subtitle2">{{ name }}</div>
         <div class="text-subtitle2">${{ price }}</div>
       </q-card-section>
 
@@ -14,7 +15,7 @@
       </q-card-section>
 
       <q-card-section class="q-pt-none">
-        <q-btn class="q-px-lg" color="pink-5" label="More" @click="opendis = true" to="/" />
+        <q-btn class="q-px-lg" color="pink-5" :to="'/products/' + _id" label="More" @click="opendis = true" />
       </q-card-section>
     </q-card>
 </template>
