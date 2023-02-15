@@ -16,7 +16,7 @@
         <q-btn v-if="!isLogin" class="btn-r" style="background:#F3A308 ; color: white" label="會員註冊" to="/register"/>
         <q-btn v-if="!isLogin" class="btn-r" style="background:#F3A308 ; color: white" label="會員登入" to="/login"/>
         <!-- <q-btn v-if="isLogin" class="btn-r" style="background:#F3A308 ; color: white" :content="cart" label="購物車" to="/cart"/> -->
-        <q-btn v-if="isLogin" class="glossy btn-car" round color="amber-8" :content="cart" icon="local_activity" to="/cart">
+        <q-btn v-if="isLogin" class="glossy btn-car" round color="amber-8" :content="cart" icon="account_box" to="/cart">
         <q-badge color="red" rounded floating :label="CartSeat" />
         </q-btn>
         <q-btn v-if="isLogin" class="btn-r" style="background:#F3A308 ; color: white" label="訂單" to="/Order"/>
@@ -49,13 +49,13 @@
       <router-view />
     </q-page-container>
 
-    <q-footer elevated class="bg-grey-8 text-white">
+    <!-- <q-footer elevated class="bg-grey-8 text-white">
       <q-toolbar>
         <q-toolbar-title>
           <div class="foot-font">泰山前端網站開發</div>
         </q-toolbar-title>
       </q-toolbar>
-    </q-footer>
+    </q-footer> -->
 
   </q-layout>
 </template>
