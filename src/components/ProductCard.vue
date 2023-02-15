@@ -22,8 +22,9 @@
 </template>
 
 <script setup>
-defineProps({
+import { useUserStore } from 'src/stores/user'
 
+defineProps({
   _id: {
     type: String,
     default: ''
