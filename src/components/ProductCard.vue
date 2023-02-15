@@ -16,7 +16,7 @@
 
       <q-card-section class="q-pt-none">
         <q-btn class="q-px-lg" color="pink-5" :to="'/products/' + _id" label="More" @click="opendis = true" />
-        <q-btn round color="deep-orange" icon="edit_location" />
+        <q-btn class="like" round color="deep-orange" icon="favorite" @click="editCart({_id, quantity: 1})" />
       </q-card-section>
     </q-card>
 </template>
@@ -59,10 +59,16 @@ defineProps({
   }
 })
 
+const user = useUserStore()
+const { editCart } = user
 </script>
 
 <style>
 .q-card{
   width: 300px;
+}
+
+.like{
+  margin-left: 135px;
 }
 </style>

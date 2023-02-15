@@ -9,7 +9,6 @@ export const useUserStore = defineStore('user', () => {
   const account = ref('')
   const email = ref('')
   const cart = ref(0)
-  const like = ref(0)
   const role = ref(0)
 
   const isLogin = computed(() => {
@@ -80,7 +79,7 @@ export const useUserStore = defineStore('user', () => {
     }
   }
 
-  const editLike = async ({ _id, quantity }) => {
+  const editCart = async ({ _id, quantity }) => {
     if (token.value.length === 0) {
       Swal.fire({
         icon: 'error',
@@ -91,12 +90,12 @@ export const useUserStore = defineStore('user', () => {
       return
     }
     try {
-      const { data } = await apiAuth.post('users/like', { p_id: _id, quantity: parseInt(quantity) })
-      like.value = data.result
+      const { data } = await apiAuth.post('/users/cart', { p_id: _id, quantity: parseInt(quantity) })
+      cart.value = data.result
       Swal.fire({
         icon: 'success',
         title: '成功',
-        text: '加入最愛'
+        text: '加入購物車成功'
       })
     } catch (error) {
       Swal.fire({
@@ -119,7 +118,7 @@ export const useUserStore = defineStore('user', () => {
     isLogin,
     isAdmin,
     avatar,
-    editLike
+    editCart
   }
 }, {
   persist: {
