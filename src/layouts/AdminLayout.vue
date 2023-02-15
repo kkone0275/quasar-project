@@ -11,7 +11,7 @@
           <img class="logo-show" src="../assets/img/show.png" to="/">
         </q-toolbar-title>
         <q-btn class="font-r" flat label="網站首頁" to="/"/>
-        <q-btn class="font-r" flat label="組隊揪夥" />
+        <q-btn class="font-r" flat label="組隊揪夥" to="/teamup" />
         <q-btn class="font-r" flat label="時間填空" />
         <q-btn class="font-r" flat label="關於我們" />
         <div class="q-pa-md q-gutter-sm" style="height: 80px">

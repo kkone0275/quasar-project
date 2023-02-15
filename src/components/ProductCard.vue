@@ -16,13 +16,15 @@
 
       <q-card-section class="q-pt-none">
         <q-btn class="q-px-lg" color="pink-5" :to="'/products/' + _id" label="More" @click="opendis = true" />
+        <q-btn round color="pink-6" icon="favorite" @click="editLike({_id, quantity: 1})" />
       </q-card-section>
     </q-card>
 </template>
 
 <script setup>
-defineProps({
+import { useUserStore } from 'src/stores/user'
 
+defineProps({
   _id: {
     type: String,
     default: ''
@@ -56,6 +58,9 @@ defineProps({
     default: ''
   }
 })
+
+const user = useUserStore()
+const { editLike } = user
 
 </script>
 
