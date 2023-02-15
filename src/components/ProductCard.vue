@@ -10,12 +10,13 @@
         <div class="text-subtitle2">${{ price }}</div>
       </q-card-section>
 
-      <q-card-section class="q-pt-none">
+      <q-card-section class="q-pt-none ">
         {{ description }}
       </q-card-section>
 
       <q-card-section class="q-pt-none">
         <q-btn class="q-px-lg" color="pink-5" :to="'/products/' + _id" label="More" @click="opendis = true" />
+        <q-btn round color="deep-orange" icon="edit_location" />
       </q-card-section>
     </q-card>
 </template>

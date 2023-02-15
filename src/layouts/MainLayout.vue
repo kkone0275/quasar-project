@@ -15,7 +15,10 @@
         <q-btn class="font-r" flat label="關於我們" :class="changeActiveClass('/3')"/>
         <q-btn v-if="!isLogin" class="btn-r" style="background:#F3A308 ; color: white" label="會員註冊" to="/register"/>
         <q-btn v-if="!isLogin" class="btn-r" style="background:#F3A308 ; color: white" label="會員登入" to="/login"/>
-        <q-btn v-if="isLogin" class="btn-r" style="background:#F3A308 ; color: white" :content="cart" label="購物車" to="/cart"/>
+        <!-- <q-btn v-if="isLogin" class="btn-r" style="background:#F3A308 ; color: white" :content="cart" label="購物車" to="/cart"/> -->
+        <q-btn v-if="isLogin" class="glossy btn-car" round color="amber-8" :content="cart" icon="local_activity" to="/cart">
+        <q-badge color="red" rounded floating :label="CartSeat" />
+        </q-btn>
         <q-btn v-if="isLogin" class="btn-r" style="background:#F3A308 ; color: white" label="訂單" to="/Order"/>
         <q-btn v-if="isLogin && isAdmin" class="btn-r" style="background:#F3A308 ; color: white" label="管理" to="/admin"/>
         <q-btn v-if="isLogin" class="btn-r" style="background:#F3A308 ; color: white" label="會員登出" @click="logout"/>
@@ -73,6 +76,11 @@
 color:#C01E6C;
 font-size: 20px;
 font-weight: bold;
+}
+
+.btn-car{
+  margin-left: 15px;
+  margin-right: 30px;
 }
 
 .q-toolbar{
