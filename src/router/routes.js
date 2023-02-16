@@ -53,6 +53,16 @@ const routes = [
           login: false,
           admin: false
         }
+      },
+      {
+        path: 'cart',
+        name: '購物車',
+        component: () => import('src/pages/front/CartViewPage.vue'),
+        meta: {
+          title: '活動網站 | 購物車',
+          login: false,
+          admin: false
+        }
       }
     ]
   },

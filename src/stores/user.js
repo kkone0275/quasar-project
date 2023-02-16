@@ -98,6 +98,7 @@ export const useUserStore = defineStore('user', () => {
         text: '加入購物車成功'
       })
     } catch (error) {
+      console.log(error)
       Swal.fire({
         icon: 'error',
         title: '失敗',

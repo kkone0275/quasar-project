@@ -6,8 +6,8 @@
       <p>${{ product.price }}</p>
       <p style="white-space: pre;">{{ product.description }}</p>
       <q-form v-model="valid" @submit="submitCart">
-          <q-input v-model.number="quantity" label="數量" :rules="[rules.required, rules.number]" />
-          <q-btn label="加入購物車" type="submit" color="primary"/>
+          <q-input v-model.number="quantity" type="number" label="數量" :rules="[rules.required, rules.number]" />
+          <q-btn label="加入購物車" type="submit" color="primary" />
         </q-form>
     </div>
 </template>
@@ -17,13 +17,14 @@ import { reactive, ref } from 'vue'
 import { api } from '../../boot/axios'
 import { useRoute, useRouter } from 'vue-router'
 import { Swal } from 'sweetalert2'
-import { useUserStore } from '../../stores/user'
 
-const route = useRoute()
-const router = useRouter()
+import { useUserStore } from 'src/stores/user'
 
 const user = useUserStore()
 const { editCart } = user
+
+const route = useRoute()
+const router = useRouter()
 
 const valid = ref(false)
 const quantity = ref(0)
@@ -48,9 +49,10 @@ const product = reactive({
 })
 
 const submitCart = () => {
-  if (!valid.value) return
+  if (valid.value) return
+
   editCart({ _id: product._id, quantity: quantity.value })
-};
+}
 
 (async () => {
   try {

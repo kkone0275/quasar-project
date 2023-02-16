@@ -40,7 +40,7 @@
 } */
 .bgc {
   width: 100%;
-  height: 88.6vh;
+  height: 100vh;
   background-color: rgb(176, 176, 176);
 }
 

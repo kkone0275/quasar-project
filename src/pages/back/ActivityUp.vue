@@ -48,6 +48,14 @@
                   請上傳.jpg檔
                 </template>
               </q-file>
+              <q-file class="col-11" filled v-model="form.images" label="請選擇主圖片(可複選)" use-chips multiple>
+                  <template v-slot:prepend>
+                    <q-icon name="attach_file"></q-icon>
+                  </template>
+                </q-file>
+                <div class="row" >
+                    <q-img class="q-ml-lg" v-for="image in images" :key="image" :src="image" width="100px" />
+                </div>
 
               <q-select class="col-8" filled :options="categories" v-model="form.category" label="活動地點" :rules="[rules.required]" />
 
@@ -97,7 +105,7 @@
 
 <script setup>
 import { apiAuth } from '../../boot/axios.js'
-import { reactive } from 'vue'
+import { ref, reactive } from 'vue'
 import Swal from 'sweetalert2'
 
 const categories = ['台北市', '新北市', '新竹市', '台中市', '雲林縣', '台中市']
@@ -111,12 +119,14 @@ const rules = {
 }
 
 const products = reactive([])
+const images = ref([])
 const form = reactive({
   _id: '',
   name: '',
   price: 0,
   description: '',
   image: undefined,
+  images: [],
   sell: false,
   category: '',
   valid: false,
@@ -132,6 +142,7 @@ const openAdd = (idx) => {
     form.price = 0
     form.description = ''
     form.image = undefined
+    form.images = []
     form.sell = false
     form.category = ''
     form.valid = false
@@ -142,7 +153,8 @@ const openAdd = (idx) => {
     form.name = products[idx].name
     form.price = products[idx].price
     form.description = products[idx].description
-    form.image = undefined
+    form.image = products[idx].image
+    form.images = products[idx].images
     form.sell = products[idx].sell
     form.category = products[idx].category
     form.valid = false
@@ -151,6 +163,22 @@ const openAdd = (idx) => {
   }
   form.dialog = true
 }
+
+// watch(() => form.images, (value) => {
+//   images.value = []
+//   value.forEach((img) => previewUrlHandler(img))
+// })
+// const previewUrlHandler = (file) => {
+//   if (file && file.type.startsWith('image/')) {
+//     const reader = new FileReader()
+//     reader.addEventListener('load', (event) => {
+//       images.value.push(event.target.result)
+//     })
+//     reader.readAsDataURL(file)
+//   } else {
+//     images.value.push(file)
+//   }
+// }
 
 const submit = async () => {
   form.loading = true
@@ -161,6 +189,9 @@ const submit = async () => {
   fd.append('sell', form.sell)
   fd.append('image', form.image)
   fd.append('category', form.category)
+  for (const i of form.images) {
+    fd.append('images', i)
+  }
 
   try {
     if (form._id.length === 0) {

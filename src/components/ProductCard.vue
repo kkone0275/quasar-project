@@ -24,6 +24,9 @@
 <script setup>
 import { useUserStore } from 'src/stores/user'
 
+const user = useUserStore()
+const { editCart } = user
+
 defineProps({
   _id: {
     type: String,
@@ -52,15 +55,9 @@ defineProps({
   category: {
     type: String,
     default: ''
-  },
-  volume: {
-    type: String,
-    default: ''
   }
 })
 
-const user = useUserStore()
-const { editCart } = user
 </script>
 
 <style>
