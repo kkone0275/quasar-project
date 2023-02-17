@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 import { api, apiAuth } from '../boot/axios.js'
 import Swal from 'sweetalert2'
+import { Notify } from 'quasar'
 import router from 'src/router/index.js'
 
 export const useUserStore = defineStore('user', () => {
@@ -92,13 +93,42 @@ export const useUserStore = defineStore('user', () => {
     try {
       const { data } = await apiAuth.post('/users/cart', { p_id: _id, quantity: parseInt(quantity) })
       cart.value = data.result
+      // Swal.fire({
+      //   icon: 'success',
+      //   title: '成功',
+      //   text: '資料更新成功'
+      // })
+      if (quantity >= 1) {
+        Notify.create({
+          message: '已增加',
+          color: 'orange'
+        })
+      } else if (quantity < 0) {
+        Notify.create({
+          message: '已減少',
+          color: 'red'
+        })
+      }
+    } catch (error) {
+      console.log(error)
+      Swal.fire({
+        icon: 'error',
+        title: '失敗',
+        text: error?.response?.data?.message || '發生錯誤'
+      })
+    }
+  }
+
+  const checkout = async () => {
+    try {
+      await apiAuth.post('/orders')
+      cart.value = 0
       Swal.fire({
         icon: 'success',
         title: '成功',
-        text: '加入購物車成功'
+        text: '送出成功'
       })
     } catch (error) {
-      console.log(error)
       Swal.fire({
         icon: 'error',
         title: '失敗',
@@ -119,7 +149,8 @@ export const useUserStore = defineStore('user', () => {
     isLogin,
     isAdmin,
     avatar,
-    editCart
+    editCart,
+    checkout
   }
 }, {
   persist: {

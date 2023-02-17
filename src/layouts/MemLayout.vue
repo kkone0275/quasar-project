@@ -18,7 +18,7 @@
           <q-btn flat round dense :icon="menu" class="q-mr-sm text-primary">
           <img :src="avatar" style="width: 45px; height: 45px;">
           </q-btn>
-    <q-btn class="font-r" flat label="會員登出" />
+        <q-btn class="font-r" flat label="會員登出" @click="logout"/>
   </div>
         <!-- <q-btn class="btn-r" color="yellow-9" @click="prompt = true" label="會員登入" to="login"/> -->
         <!-- <q-btn class="btn-r" label="會員註冊" color="yellow-9" @click="register = true"/> -->
@@ -46,10 +46,9 @@
     <q-drawer show-if-above v-model="leftDrawerOpen" side="left" bordered>
       <!-- drawer content -->
       <div class="q-pa-md q-gutter-sm" style="height: 80px">
-      <q-btn class="btn-left" unelevated rounded color="orange-6" label="會員管理" to="products" /><br>
-      <q-btn class="btn-left" unelevated rounded color="orange-6" label="訂單管理" to="ordermange" /><br>
-      <q-btn class="btn-left" unelevated rounded color="orange-6" label="揪團管理" to="products" /><br>
-      <q-btn class="btn-left" unelevated rounded color="orange-6" label="填空管理" to="products" /><br>
+      <q-btn class="btn-left" unelevated rounded color="orange-6" label="會員中心" to="products" /><br>
+      <q-btn class="btn-left" unelevated rounded color="orange-6" label="活動上架" to="products" /><br>
+      <q-btn class="btn-left" unelevated rounded color="orange-6" label="填空上架" to="products" /><br>
       <q-btn class="btn-left" unelevated rounded color="orange-6" label="會員登出" @click="logout" />
       <!-- <q-btn class="btn-r" style="background:#F3A308 ; color: white" label="會員登出" @click="logout"/> -->
       </div>

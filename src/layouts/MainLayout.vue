@@ -19,7 +19,8 @@
         <q-btn v-if="isLogin" class="glossy btn-car" round color="amber-8" :content="cart" icon="account_box" to="/cart">
         <q-badge color="red" rounded floating :label="CartSeat" />
         </q-btn>
-        <q-btn v-if="isLogin" class="btn-r" style="background:#F3A308 ; color: white" label="訂單" to="/Order"/>
+        <q-btn v-if="isLogin" class="btn-r" style="background:#F3A308 ; color: white" label="訂單" to="/orders"/>
+        <q-btn v-if="isLogin" class="btn-r" style="background:#F3A308 ; color: white" label="會員中心" to="/member"/>
         <q-btn v-if="isLogin && isAdmin" class="btn-r" style="background:#F3A308 ; color: white" label="管理" to="/admin"/>
         <q-btn v-if="isLogin" class="btn-r" style="background:#F3A308 ; color: white" label="會員登出" @click="logout"/>
         <!-- <q-btn class="btn-r" color="yellow-9" @click="prompt = true" label="會員登入" to="login"/> -->

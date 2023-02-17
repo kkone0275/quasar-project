@@ -63,6 +63,42 @@ const routes = [
           login: false,
           admin: false
         }
+      },
+      {
+        path: 'orders',
+        name: '訂單',
+        component: () => import('src/pages/front/OrdersView.vue'),
+        meta: {
+          title: '活動網站 | 訂單',
+          login: true,
+          admin: false
+        }
+      }
+    ]
+  },
+  {
+    path: '/member',
+    component: () => import('layouts/MemLayout.vue'),
+    children: [
+      {
+        path: '',
+        name: '會員管理',
+        component: () => import('src/pages/back/AdminPage.vue'),
+        meta: {
+          title: '會員管理',
+          login: true,
+          admin: true
+        }
+      },
+      {
+        path: '/products',
+        name: '活動上架',
+        component: () => import('../pages/back/ActivityUp.vue'),
+        meta: {
+          title: '活動上架',
+          login: true,
+          admin: true
+        }
       }
     ]
   },
@@ -85,7 +121,17 @@ const routes = [
         name: '活動上架',
         component: () => import('../pages/back/ActivityUp.vue'),
         meta: {
-          title: '活動上架',
+          title: '活動管理',
+          login: true,
+          admin: true
+        }
+      },
+      {
+        path: '/ordermange',
+        name: 'adminorders',
+        component: () => import('../pages/back/OrderManage.vue'),
+        meta: {
+          title: '訂單管理',
           login: true,
           admin: true
         }
