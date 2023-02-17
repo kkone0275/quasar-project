@@ -46,9 +46,9 @@
     <q-drawer show-if-above v-model="leftDrawerOpen" side="left" bordered>
       <!-- drawer content -->
       <div class="q-pa-md q-gutter-sm" style="height: 80px">
-      <q-btn class="btn-left" unelevated rounded color="orange-6" label="會員中心" to="products" /><br>
-      <q-btn class="btn-left" unelevated rounded color="orange-6" label="活動上架" to="products" /><br>
-      <q-btn class="btn-left" unelevated rounded color="orange-6" label="填空上架" to="products" /><br>
+      <q-btn class="btn-left" unelevated rounded color="orange-6" label="會員中心" to="" /><br>
+      <q-btn class="btn-left" unelevated rounded color="orange-6" label="揪團發佈" to="/member/addgang" /><br>
+      <q-btn class="btn-left" unelevated rounded color="orange-6" label="填空上架" to="" /><br>
       <q-btn class="btn-left" unelevated rounded color="orange-6" label="會員登出" @click="logout" />
       <!-- <q-btn class="btn-r" style="background:#F3A308 ; color: white" label="會員登出" @click="logout"/> -->
       </div>

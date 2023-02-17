@@ -18,7 +18,7 @@
           <q-btn flat round dense :icon="menu" class="q-mr-sm text-primary">
           <img :src="avatar" style="width: 45px; height: 45px;">
           </q-btn>
-    <q-btn class="font-r" flat label="會員登出" />
+    <q-btn class="font-r" flat label="會員登出" @click="logout"/>
   </div>
         <!-- <q-btn class="btn-r" color="yellow-9" @click="prompt = true" label="會員登入" to="login"/> -->
         <!-- <q-btn class="btn-r" label="會員註冊" color="yellow-9" @click="register = true"/> -->

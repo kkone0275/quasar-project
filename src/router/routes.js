@@ -45,6 +45,16 @@ const routes = [
         }
       },
       {
+        path: 'timefill',
+        name: '時間填空',
+        component: () => import('src/pages/front/TimeFill.vue'),
+        meta: {
+          title: '時間填空',
+          login: false,
+          admin: false
+        }
+      },
+      {
         path: 'products/:id',
         name: 'products',
         component: () => import('src/pages/front/ProductPageView.vue'),
@@ -79,25 +89,28 @@ const routes = [
   {
     path: '/member',
     component: () => import('layouts/MemLayout.vue'),
+    meta: {
+      title: '會員中心'
+    },
     children: [
       {
         path: '',
-        name: '會員管理',
-        component: () => import('src/pages/back/AdminPage.vue'),
+        name: '會員中心',
+        component: () => import('src/pages/back/MemberPage.vue'),
         meta: {
-          title: '會員管理',
+          title: '會員中心',
           login: true,
-          admin: true
+          admin: false
         }
       },
       {
-        path: '/products',
-        name: '活動上架',
-        component: () => import('../pages/back/ActivityUp.vue'),
+        path: 'addgang',
+        name: '揪團發佈',
+        component: () => import('../pages/back/AddGang.vue'),
         meta: {
-          title: '活動上架',
+          title: '揪團發佈',
           login: true,
-          admin: true
+          admin: false
         }
       }
     ]
@@ -105,6 +118,9 @@ const routes = [
   {
     path: '/admin',
     component: () => import('layouts/AdminLayout.vue'),
+    meta: {
+      title: '網站管理'
+    },
     children: [
       {
         path: '',
@@ -127,7 +143,7 @@ const routes = [
         }
       },
       {
-        path: '/ordermange',
+        path: '/order',
         name: 'adminorders',
         component: () => import('../pages/back/OrderManage.vue'),
         meta: {
