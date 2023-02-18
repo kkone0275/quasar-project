@@ -12,8 +12,8 @@
         </q-toolbar-title>
         <q-btn class="font-r" flat label="網站首頁" to="/"/>
         <q-btn class="font-r" flat label="組隊揪夥" to="/teamup" />
-        <q-btn class="font-r" flat label="時間填空" />
-        <q-btn class="font-r" flat label="關於我們" />
+        <q-btn class="font-r" flat label="時間填空" to="timefill" />
+        <q-btn class="font-r" flat label="關於我們" to="aboutme" />
         <div class="q-pa-md q-gutter-sm" style="height: 80px">
           <q-btn flat round dense :icon="menu" class="q-mr-sm text-primary">
           <img :src="avatar" style="width: 45px; height: 45px;">

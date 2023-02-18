@@ -63,6 +63,7 @@ defineProps({
 <style>
 .q-card{
   width: 300px;
+  margin-top: -3rem;
 }
 
 .like{

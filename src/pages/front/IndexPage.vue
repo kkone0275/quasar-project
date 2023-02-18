@@ -1,4 +1,5 @@
 <template>
+  <img class="fish" src="../../images/fishw.png" alt="fish-w">
   <p class="word01">享受生活</p>
   <div class="title01">
   <h1 class="title02">讓空閒釋放</h1>
@@ -76,7 +77,7 @@
 }
 
 .word01{
-  font-size: 25px;
+  font-size: 28px;
   font-weight: 800;
   position: absolute;
   letter-spacing:1rem;
@@ -87,10 +88,19 @@
 
 .word02{
   font-size: 20px;
-  font-weight: 500;
+  font-weight: 550;
   position: absolute;
   top: 55%;
   left: 10%;
+  color: #9396A0;
+}
+.fish{
+  width: 110px;
+  height: 60px;
+  position: absolute;
+  top:16%;
+  left: 24%;
+  rotate:calc(330deg)
 }
 </style>
 

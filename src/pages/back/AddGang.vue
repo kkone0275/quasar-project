@@ -31,7 +31,7 @@
             <q-form @submit="submit">
               <div class="flex row justify-between" style="padding: 16px 50px 16px 50px;">
               <q-input class="col-12" style="padding:10px ;" filled v-model="form.name" label="活動名稱" lazy-rules :rules="[rules.required]"/>
-              <q-input class="col-12" style="padding:10px ;" filled v-model="form.price" label="活動價格" lazy-rules :rules="[rules.required,rules.price]"/>
+              <q-input class="col-12" style="padding:10px ;" filled v-model="form.price" label="活動價格" lazy-rules :rules="[rules.price]"/>
               <q-input class="col-12" style="padding: 10px;" filled v-model="form.description" label="揪團活動說明"
               clearable type="textarea" @keydown="processTextareaFill"
               @focus="processTextareaFill"
