@@ -10,9 +10,9 @@
           <img class="logo-show" src="../assets/img/show.png" to="/">
         </q-toolbar-title>
         <q-btn class="font-r" flat label="網站首頁" :class="changeActiveClass('/')" to="/" />
-        <q-btn class="font-r" flat label="組隊揪夥" :class="changeActiveClass('/teamup')" to="teamup" />
-        <q-btn class="font-r" flat label="時間填空" :class="changeActiveClass('/timefill')" to="timefill" />
-        <q-btn class="font-r" flat label="關於我們" :class="changeActiveClass('/3')"/>
+        <q-btn class="font-r" flat label="組隊揪夥" :class="changeActiveClass('/teamup')" to="/teamup" />
+        <q-btn class="font-r" flat label="時間填空" :class="changeActiveClass('/timefill')" to="/timefill" />
+        <q-btn class="font-r" flat label="關於我們" :class="changeActiveClass('/aboutme')" to="/aboutme" />
         <q-btn v-if="!isLogin" class="btn-r" style="background:#F3A308 ; color: white" label="會員註冊" to="/register"/>
         <q-btn v-if="!isLogin" class="btn-r" style="background:#F3A308 ; color: white" label="會員登入" to="/login"/>
         <!-- <q-btn v-if="isLogin" class="btn-r" style="background:#F3A308 ; color: white" :content="cart" label="購物車" to="/cart"/> -->
@@ -21,7 +21,7 @@
         </q-btn>
         <q-btn v-if="isLogin" class="btn-r" style="background:#F3A308 ; color: white" label="訂單" to="/orders"/>
         <q-btn v-if="isLogin" class="btn-r" style="background:#F3A308 ; color: white" label="會員中心" to="/member"/>
-        <q-btn v-if="isLogin && isAdmin" class="btn-r" style="background:#F3A308 ; color: white" label="管理" to="/admin"/>
+        <q-btn v-if="isLogin && isAdmin" class="btn-r" style="background:#F3A308 ; color: white" label="網站管理" to="/admin"/>
         <q-btn v-if="isLogin" class="btn-r" style="background:#F3A308 ; color: white" label="會員登出" @click="logout"/>
         <!-- <q-btn class="btn-r" color="yellow-9" @click="prompt = true" label="會員登入" to="login"/> -->
         <!-- <q-btn class="btn-r" label="會員註冊" color="yellow-9" @click="register = true"/> -->

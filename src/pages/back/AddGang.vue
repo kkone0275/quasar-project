@@ -1,7 +1,12 @@
 <template>
   <h5 class="text-center">活動上架</h5>
   <q-btn class="add" style="background: #F3A308; color: white" @click="openAdd(-1)" label="新增揪團" />
-  <table class="box" style="width: 60%; " border="1">
+
+  <div class="q-pa-md q-gutter-sm col-12" align="center">
+    <q-btn v-for="gang,index in categories" unelevated rounded color="amber-7" :key="index" :label="gang" @click="gangActive=gang" />
+  </div>
+
+  <table :gangActive="gangActive" class="box" style="width: 60%; " border="1">
           <thead>
             <tr align="left">
               <th>圖片</th>
@@ -10,7 +15,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(product, idx) in products" :key="product._id">
+            <tr v-for="(product, idx) in ac" :key="product._id">
               <td align="center">
                 <img :src="product.image" :aspect-ratio="1" :width="100" :height="100"
                 style="object-fit: cover; margin: auto;">
@@ -31,7 +36,7 @@
             <q-form @submit="submit">
               <div class="flex row justify-between" style="padding: 16px 50px 16px 50px;">
               <q-input class="col-12" style="padding:10px ;" filled v-model="form.name" label="活動名稱" lazy-rules :rules="[rules.required]"/>
-              <q-input class="col-12" style="padding:10px ;" filled v-model="form.price" label="活動價格" lazy-rules :rules="[rules.required,rules.price]"/>
+              <q-input class="col-12" style="padding:10px ;" filled v-model="form.price" label="活動價格" lazy-rules :rules="[rules.price]"/>
               <q-input class="col-12" style="padding: 10px;" filled v-model="form.description" label="揪團活動說明"
               clearable type="textarea" @keydown="processTextareaFill"
               @focus="processTextareaFill"
@@ -103,10 +108,22 @@
 
 <script setup>
 import { apiAuth } from '../../boot/axios.js'
-import { ref, reactive } from 'vue'
+import { ref, reactive, computed } from 'vue'
 import Swal from 'sweetalert2'
 
-const categories = ['台北市', '新北市', '新竹市', '台中市', '雲林縣', '台中市']
+const categories = ['所有地區', '台北市', '新北市', '新竹市', '台中市', '雲林縣', '台中市']
+const gangActive = ref(categories[0])
+
+const ac = computed(() => {
+  return products.filter((fish1) => {
+    if (gangActive.value === categories[0]) {
+      return fish1
+    } else {
+      return fish1.category === gangActive.value
+    }
+  })
+})
+
 const rules = {
   required (value) {
     return !!value || '欄位必填'

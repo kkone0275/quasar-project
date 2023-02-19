@@ -1,6 +1,6 @@
 <template>
-  <h5 class="text-center">活動管理</h5>
-  <!-- <q-btn class="add" style="background: #F3A308; color: white" @click="openAdd(-1)" label="新增揪團" /> -->
+  <h5 class="text-center">填空上架</h5>
+  <q-btn class="add" style="background: #F3A308; color: white" @click="openAdd(-1)" label="新增揪團" />
   <table class="box" style="width: 60%; " border="1">
           <thead>
             <tr align="left">
@@ -10,12 +10,12 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(product, idx) in products" :key="product._id">
+            <tr v-for="(time, idx) in times" :key="time._id">
               <td align="center">
-                <img :src="product.image" :aspect-ratio="1" :width="100" :height="100"
+                <img :src="time.image" :aspect-ratio="1" :width="100" :height="100"
                 style="object-fit: cover; margin: auto;">
               </td>
-              <td>{{ product.name }}</td>
+              <td>{{ time.name }}</td>
               <td align="center">
                 <q-btn color="primary" icon="edit" @click="openAdd(idx)" />
               </td>
@@ -31,12 +31,12 @@
             <q-form @submit="submit">
               <div class="flex row justify-between" style="padding: 16px 50px 16px 50px;">
               <q-input class="col-12" style="padding:10px ;" filled v-model="form.name" label="活動名稱" lazy-rules :rules="[rules.required]"/>
-              <q-input class="col-12" style="padding:10px ;" filled v-model="form.price" label="活動價格" lazy-rules :rules="[rules.required,rules.price]"/>
-              <q-input class="col-12" style="padding: 10px;" filled v-model="form.description" label="商品說明"
+              <!-- <q-input class="col-12" style="padding:10px ;" filled v-model="form.price" label="活動價格" lazy-rules :rules="[rules.price]"/> -->
+              <q-input class="col-12" style="padding: 10px;" filled v-model="form.description" label="揪團活動說明"
               clearable type="textarea" @keydown="processTextareaFill"
               @focus="processTextareaFill"
               :rules="[rules.required]"/>
-              <q-file class="col-12" filled bottom-slots v-model="form.image" label="活動圖片" counter>
+              <!-- <q-file class="col-12" filled bottom-slots v-model="form.image" label="活動圖片" counter>
                 <template v-slot:prepend>
                   <q-icon name="cloud_upload" @click.stop.prevent />
                 </template>
@@ -49,17 +49,15 @@
                 </template>
               </q-file>
               <q-file class="col-11" filled v-model="form.images" label="請選擇主圖片(可複選)" use-chips multiple>
-                  <template v-slot:prepend>
-                    <q-icon name="attach_file"></q-icon>
-                  </template>
-                </q-file>
+                <template v-slot:prepend>
+                  <q-icon name="attach_file"></q-icon>
+                </template>
+              </q-file>
                 <div class="row" >
                     <q-img class="q-ml-lg" v-for="image in images" :key="image" :src="image" width="100px" />
-                </div>
+                </div> -->
 
               <q-select class="col-8" filled :options="categories" v-model="form.category" label="活動地點" :rules="[rules.required]" />
-
-              <q-checkbox class="col-8" style="margin-bottom: 1.2rem;" v-model="form.sell" label="上架" />
 
               <q-btn class="col-6" style="padding: 10px;" flat label="Cancel" color="primary" :disabled="form.loading" v-close-popup />
 
@@ -105,7 +103,7 @@
 
 <script setup>
 import { apiAuth } from '../../boot/axios.js'
-import { ref, reactive } from 'vue'
+import { reactive } from 'vue'
 import Swal from 'sweetalert2'
 
 const categories = ['台北市', '新北市', '新竹市', '台中市', '雲林縣', '台中市']
@@ -118,15 +116,12 @@ const rules = {
   }
 }
 
-const products = reactive([])
-const images = ref([])
+const times = reactive([])
 const form = reactive({
   _id: '',
   name: '',
   price: 0,
   description: '',
-  image: undefined,
-  images: [],
   sell: false,
   category: '',
   valid: false,
@@ -141,22 +136,16 @@ const openAdd = (idx) => {
     form.name = ''
     form.price = 0
     form.description = ''
-    form.image = undefined
-    form.images = []
-    form.sell = false
     form.category = ''
     form.valid = false
     form.loading = false
     form.idx = -1
   } else {
-    form._id = products[idx]._id
-    form.name = products[idx].name
-    form.price = products[idx].price
-    form.description = products[idx].description
-    form.image = products[idx].image
-    form.images = products[idx].images
-    form.sell = products[idx].sell
-    form.category = products[idx].category
+    form._id = times[idx]._id
+    form.name = times[idx].name
+    form.price = times[idx].price
+    form.description = times[idx].description
+    form.category = times[idx].category
     form.valid = false
     form.loading = false
     form.idx = idx
@@ -164,47 +153,26 @@ const openAdd = (idx) => {
   form.dialog = true
 }
 
-// watch(() => form.images, (value) => {
-//   images.value = []
-//   value.forEach((img) => previewUrlHandler(img))
-// })
-// const previewUrlHandler = (file) => {
-//   if (file && file.type.startsWith('image/')) {
-//     const reader = new FileReader()
-//     reader.addEventListener('load', (event) => {
-//       images.value.push(event.target.result)
-//     })
-//     reader.readAsDataURL(file)
-//   } else {
-//     images.value.push(file)
-//   }
-// }
-
 const submit = async () => {
   form.loading = true
   const fd = new FormData()
   fd.append('name', form.name)
   fd.append('price', form.price)
   fd.append('description', form.description)
-  fd.append('sell', form.sell)
-  fd.append('image', form.image)
   fd.append('category', form.category)
-  for (const i of form.images) {
-    fd.append('images', i)
-  }
 
   try {
     if (form._id.length === 0) {
-      const { data } = await apiAuth.post('/products', fd)
-      products.push(data.result)
+      const { data } = await apiAuth.post('/times', fd)
+      times.push(data.result)
       Swal.fire({
         icon: 'success',
         title: '成功',
         text: '新增成功'
       })
     } else {
-      const { data } = await apiAuth.patch('/products/' + form._id, fd)
-      products[form.idx] = data.result
+      const { data } = await apiAuth.patch('/times/' + form._id, fd)
+      times[form.idx] = data.result
       Swal.fire({
         icon: 'success',
         title: '成功',
@@ -224,8 +192,9 @@ const submit = async () => {
 
 (async () => {
   try {
-    const { data } = await apiAuth.get('/products/all')
-    products.push(...data.result)
+    // const { data } = await apiAuth.get('/times/all')
+    const { data } = await apiAuth.get('/times/user')
+    times.push(...data.result)
   } catch (error) {
     Swal.fire({
       icon: 'error',

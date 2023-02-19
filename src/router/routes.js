@@ -55,6 +55,16 @@ const routes = [
         }
       },
       {
+        path: 'aboutme',
+        name: '關於我們',
+        component: () => import('src/pages/front/AboutMe.vue'),
+        meta: {
+          title: '關於我們',
+          login: false,
+          admin: false
+        }
+      },
+      {
         path: 'products/:id',
         name: 'products',
         component: () => import('src/pages/front/ProductPageView.vue'),
@@ -89,9 +99,9 @@ const routes = [
   {
     path: '/member',
     component: () => import('layouts/MemLayout.vue'),
-    meta: {
-      title: '會員中心'
-    },
+    // meta: {
+    //   title: '會員中心'
+    // },
     children: [
       {
         path: '',
@@ -109,6 +119,16 @@ const routes = [
         component: () => import('../pages/back/AddGang.vue'),
         meta: {
           title: '揪團發佈',
+          login: true,
+          admin: false
+        }
+      },
+      {
+        path: 'addtime',
+        name: '填空發佈',
+        component: () => import('../pages/back/AddTime.vue'),
+        meta: {
+          title: '填空發佈',
           login: true,
           admin: false
         }
