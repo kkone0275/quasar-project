@@ -49,6 +49,7 @@
       <q-btn class="btn-left" unelevated rounded color="orange-6" label="會員中心" to="/member" /><br>
       <q-btn class="btn-left" unelevated rounded color="orange-6" label="揪團發佈" to="/member/addgang" /><br>
       <q-btn class="btn-left" unelevated rounded color="orange-6" label="填空上架" to="/member/addtime" /><br>
+      <q-btn class="btn-left" unelevated rounded color="orange-6" label="填空上架" to="/member/addtime" /><br>
       <q-btn class="btn-left" unelevated rounded color="orange-6" label="會員登出" @click="logout" />
       <!-- <q-btn class="btn-r" style="background:#F3A308 ; color: white" label="會員登出" @click="logout"/> -->
       </div>

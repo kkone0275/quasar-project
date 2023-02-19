@@ -39,8 +39,37 @@ const products = reactive([]);
 </script>
 
 <style scoped>
+<style scoped>
 .box{
   flex: auto;
+}
+
+.title01{
+  margin-top: 1%;
+  margin-bottom: 1%;
+  font-weight: 550;
+  color: #8A8888;
+  margin-left: 8%;
+}
+
+.smtitle03{
+  color:#C01E6C;
+  font-weight: 550;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  margin-left: 10%;
+}
+
+hr{
+  border: 12px solid #FFE5B4;
+}
+
+.set{
+  margin-left: 5%;
+}
+
+.card{
+  margin-left: 2%;
 }
 
 .title01{

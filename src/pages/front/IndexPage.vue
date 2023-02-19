@@ -93,6 +93,7 @@
 
 .word01{
   font-size: 28px;
+  font-size: 28px;
   font-weight: 800;
   position: absolute;
   letter-spacing:1rem;
@@ -103,6 +104,7 @@
 
 .word02{
   font-size: 20px;
+  font-weight: 550;
   font-weight: 550;
   position: absolute;
   top: 55%;
